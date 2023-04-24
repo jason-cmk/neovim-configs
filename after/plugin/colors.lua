@@ -1,3 +1,14 @@
+require("catppuccin").setup({
+    flavour = "mocha",
+highlight_overrides = {
+    all = function (colors)
+        return {
+            Visual = { bg = colors.surface0 }
+        }
+    end
+}
+})
+
 vim.cmd.colorscheme "catppuccin"
 
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })

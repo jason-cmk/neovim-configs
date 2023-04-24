@@ -1,3 +1,4 @@
+vim.api.nvim_command('set guicursor=a:block-Cursor-blinkon1,i:ver1-iCursor-blinkon0')
 vim.opt.relativenumber = true
 vim.opt.nu = true
 
