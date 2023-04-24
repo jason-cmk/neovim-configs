@@ -25,6 +25,8 @@ return require('packer').startup(function(use)
 
     use('tpope/vim-fugitive')
 
+    use('norcalli/nvim-colorizer.lua')
+
     use {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v1.x',
