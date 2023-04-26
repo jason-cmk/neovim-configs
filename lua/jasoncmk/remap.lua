@@ -1,6 +1,6 @@
 vim.g.mapleader = " "
 
-vim.keymap.set("n", "<leader>pv", ":NvimTreeToggle<cr>")
+vim.keymap.set("n", "<leader>pv", ":NvimTreeToggle<cr>", { desc = '[P]roject [v]iew explorer' })
 vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format({ async = false, timeout_ms = 10000 }) end)
 
 -- Move visual blocks
@@ -16,7 +16,7 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 -- Paste without yanking
-vim.keymap.set("x", "<leader>p", [["_dP]])
+vim.keymap.set("n", "<leader>p", [["_dP]])
 
 -- Copy to system clipboard
 vim.keymap.set({ "n", "v" }, "y", [["+y]])
