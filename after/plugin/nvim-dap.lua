@@ -24,7 +24,7 @@ vim.keymap.set('n', '<Leader>dl', function() dap.run_last() end)
 
 dap.adapters.coreclr = {
     type = 'executable',
-    command = 'C:\\Users\\jaska\\AppData\\Local\\netcoredbg',
+    command = 'C:\\Users\\jaska\\AppData\\Local\\netcoredbg\\netcoredbg',
     args = { '--interpreter=vscode' }
 }
 
@@ -34,7 +34,7 @@ dap.configurations.cs = {
         name = "launch - netcoredbg",
         request = "launch",
         program = function()
-            return vim.fn.input('Path to dll', vim.fn.getcwd() .. '\\bin\\Debug\\net7.0\\', 'file')
+            return vim.fn.input('Path to dll: ', vim.fn.getcwd() .. '\\bin\\Debug\\net7.0\\', 'file')
         end,
     },
 }
