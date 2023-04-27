@@ -13,7 +13,7 @@ return require('packer').startup(function(use)
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
 
-    use { "catppuccin/nvim", as = "catppuccin" }
+    use { 'catppuccin/nvim', as = 'catppuccin' }
 
     use('nvim-treesitter/nvim-treesitter', { run = 'TSUpdate' })
 
@@ -52,7 +52,7 @@ return require('packer').startup(function(use)
 
     -- Debugging
     use('mfussenegger/nvim-dap')
-    use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
+    use { 'rcarriga/nvim-dap-ui', requires = { 'mfussenegger/nvim-dap' } }
     use('jbyuki/one-small-step-for-vimkind')
 
     -- Neovim setup helper
@@ -64,24 +64,24 @@ return require('packer').startup(function(use)
             'nvim-tree/nvim-web-devicons', -- Optional
         },
         config = function()
-            require("nvim-tree").setup {}
+            require('nvim-tree').setup {}
         end
     }
 
     use({
-        "folke/noice.nvim",
+        'folke/noice.nvim',
         config = function()
-            require("noice").setup({
+            require('noice').setup({
                 -- add any options here
             })
         end,
         requires = {
-            -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-            "MunifTanjim/nui.nvim",
+            -- if you lazy-load any plugin below, make sure to add proper `module='...'` entries
+            'MunifTanjim/nui.nvim',
             -- OPTIONAL:
             --   `nvim-notify` is only needed, if you want to use the notification view.
             --   If not available, we use `mini` as the fallback
-            "rcarriga/nvim-notify",
+            'rcarriga/nvim-notify',
         }
     })
 
@@ -89,4 +89,9 @@ return require('packer').startup(function(use)
         'nvim-lualine/lualine.nvim',
         requires = { 'nvim-tree/nvim-web-devicons', opt = true }
     })
+
+    use {
+        'glacambre/firenvim',
+        run = function() vim.fn['firenvim#install'](0) end
+    }
 end)
