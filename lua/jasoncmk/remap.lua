@@ -1,7 +1,7 @@
 vim.g.mapleader = " "
 
-vim.keymap.set("n", "<leader>pv", ":NvimTreeToggle<cr>", { desc = '[P]roject [v]iew explorer' })
-vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format({ async = false, timeout_ms = 10000 }) end)
+vim.keymap.set({"n", "v"}, "<leader>pv", ":NvimTreeToggle<cr>", { desc = '[P]roject [v]iew explorer' })
+vim.keymap.set({"n", "v"}, "<leader>f", function() vim.lsp.buf.format({ async = false, timeout_ms = 10000 }) end)
 
 -- Move visual blocks
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
