@@ -54,6 +54,7 @@ return require('packer').startup(function(use)
     use('mfussenegger/nvim-dap')
     use { 'rcarriga/nvim-dap-ui', requires = { 'mfussenegger/nvim-dap' } }
     use('jbyuki/one-small-step-for-vimkind')
+    use('mfussenegger/nvim-dap-python')
 
     -- Neovim setup helper
     use('folke/neodev.nvim')

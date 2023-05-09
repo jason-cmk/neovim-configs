@@ -1,5 +1,8 @@
 local dap = require('dap')
 
+local dapPython = require('dap-python')
+dapPython.setup('~\\AppData\\Local\\nvim-data\\mason\\packages\\debugpy\\venv\\Scripts\\pythonw')
+
 dap.configurations.lua = {
     {
         type = 'nlua',
