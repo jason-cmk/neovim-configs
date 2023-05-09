@@ -27,3 +27,9 @@ vim.keymap.set("n", "<leader>d", [["_d]])
 
 -- Start replacing the current word
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+
+-- Window resizing
+vim.keymap.set("n", "<leader>wh", "10<C-w>>")
+vim.keymap.set("n", "<leader>wl", "10<C-w><")
+vim.keymap.set("n", "<leader>wj", "3<C-w>-")
+vim.keymap.set("n", "<leader>wk", "3<C-w>+")
