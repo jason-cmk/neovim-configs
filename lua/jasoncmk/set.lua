@@ -1,6 +1,6 @@
 vim.api.nvim_command('highlight Cursor guifg=white guibg=black')
 vim.api.nvim_command('highlight iCursor guifg=white guibg=steelblue')
-vim.api.nvim_command('set guicursor=a:block-Cursor-blinkon1,i:ver1-iCursor-blinkon0')
+vim.api.nvim_command('set guicursor=a:block-Cursor-blinkon1,i:ver1-iCursor-blinkon1')
 vim.opt.relativenumber = true
 vim.opt.nu = true
 
