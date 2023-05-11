@@ -1,10 +1,3 @@
--- disable netrw at the very start of your init.lua (strongly advised)
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
--- set termguicolors to enable highlight groups
-vim.opt.termguicolors = true
-
 require("nvim-tree").setup({
   sort_by = "case_sensitive",
   renderer = {
@@ -14,3 +7,6 @@ require("nvim-tree").setup({
     dotfiles = false,
   },
 })
+
+vim.keymap.set({"n", "v"}, "<leader>pv", ":NvimTreeToggle<cr>", { desc = '[P]roject [v]iew explorer' })
+vim.keymap.set({"n", "v"}, "<leader>ph", ":NvimTreeFindFile<cr>", { desc = '[P]roject explorer [h]ere' })

@@ -1,3 +1,10 @@
+-- disable netrw at the very start of your init.lua (strongly advised)
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- set termguicolors to enable highlight groups
+vim.opt.termguicolors = true
+
 vim.api.nvim_command('highlight Cursor guifg=white guibg=black')
 vim.api.nvim_command('highlight iCursor guifg=white guibg=steelblue')
 vim.api.nvim_command('set guicursor=a:block-Cursor-blinkon1,i:ver1-iCursor-blinkon1')

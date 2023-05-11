@@ -1,6 +1,5 @@
 vim.g.mapleader = " "
 
-vim.keymap.set({"n", "v"}, "<leader>pv", ":NvimTreeToggle<cr>", { desc = '[P]roject [v]iew explorer' })
 vim.keymap.set({"n", "v"}, "<leader>f", function() vim.lsp.buf.format({ async = false, timeout_ms = 10000 }) end)
 
 -- Move visual blocks
@@ -25,8 +24,10 @@ vim.keymap.set("n", "Y", [["+Y]])
 -- Delete to the void
 vim.keymap.set("n", "<leader>d", [["_d]])
 
--- Insert to start of line
-vim.keymap.set({"n","v"}, "<leader>i", [[:s/^/]])
+-- Insert to start of line (good for commenting)
+vim.keymap.set({"n","v"}, "<leader>i", [[:s/^/ <left>]])
+-- Remove the first non-white space chracters up to the first white-space character (good for uncommenting)
+vim.keymap.set({"n", "v"}, "<leader>I", [[:s/^\(\s\+\)\?\S\+\s\+/<CR>]])
 
 -- Window resizing
 vim.keymap.set("n", "<leader>wh", "<cmd>vertical resize -10<CR>")
