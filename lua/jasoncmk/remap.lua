@@ -25,11 +25,11 @@ vim.keymap.set("n", "Y", [["+Y]])
 -- Delete to the void
 vim.keymap.set("n", "<leader>d", [["_d]])
 
--- Start replacing the current word
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+-- Insert to start of line
+vim.keymap.set({"n","v"}, "<leader>i", [[:s/^/]])
 
 -- Window resizing
-vim.keymap.set("n", "<leader>wh", "10<C-w>>")
-vim.keymap.set("n", "<leader>wl", "10<C-w><")
-vim.keymap.set("n", "<leader>wj", "3<C-w>-")
-vim.keymap.set("n", "<leader>wk", "3<C-w>+")
+vim.keymap.set("n", "<leader>wh", "<cmd>vertical resize -10<CR>")
+vim.keymap.set("n", "<leader>wl", "<cmd>vertical resize +10<CR>")
+vim.keymap.set("n", "<leader>wj", "<cmd>horizontal resize -3<CR>")
+vim.keymap.set("n", "<leader>wk", "<cmd>horizontal resize +3<CR>")
