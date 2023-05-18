@@ -77,4 +77,9 @@ return require('packer').startup(function(use)
     })
 
     use { 'akinsho/toggleterm.nvim', tag = '*' }
+
+    use {
+        'lewis6991/gitsigns.nvim',
+        tag = 'release' -- To use the latest release (do not use this if you run Neovim nightly or dev builds!)
+    }
 end)
