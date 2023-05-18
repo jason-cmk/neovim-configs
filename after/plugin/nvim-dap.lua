@@ -66,6 +66,6 @@ end
 
 dap.adapters.coreclr = {
     type = 'executable',
-    command = mason_packages_path .. '\\netcoredbg\\netcoredbg',
+    command = mason_packages_path .. '\\netcoredbg\\netcoredbg\\netcoredbg',
     args = { '--interpreter=vscode' }
 }
