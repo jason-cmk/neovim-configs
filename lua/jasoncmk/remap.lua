@@ -1,6 +1,6 @@
 vim.g.mapleader = " "
 
-vim.keymap.set({"n", "v"}, "<leader>f", function() vim.lsp.buf.format({ async = false, timeout_ms = 10000 }) end)
+vim.keymap.set({ "n", "v" }, "<leader>f", function() vim.lsp.buf.format({ async = false, timeout_ms = 10000 }) end)
 
 -- Move visual blocks
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -23,14 +23,21 @@ vim.keymap.set("n", "Y", [["+Y]])
 
 -- Delete to the void
 vim.keymap.set("n", "<leader>d", [["_d]])
+vim.keymap.set("n", "x", [["_x]])
 
 -- Insert to start of line (good for commenting)
-vim.keymap.set({"n","v"}, "<leader>i", [[:s/^/ <left>]])
+vim.keymap.set({ "n", "v" }, "<leader>i", [[:s/^\(\)/ <left>]])
 -- Remove the first non-white space chracters up to the first white-space character (good for uncommenting)
-vim.keymap.set({"n", "v"}, "<leader>I", [[:s/^\(\s\+\)\?\S\+\s\+/<CR>]])
+vim.keymap.set({ "n", "v" }, "<leader>I", [[:s/^\(\s\+\)\?\S\+\s\+/<CR>]])
 
 -- Window resizing
-vim.keymap.set("n", "<leader>wh", "<cmd>vertical resize -10<CR>")
-vim.keymap.set("n", "<leader>wl", "<cmd>vertical resize +10<CR>")
-vim.keymap.set("n", "<leader>wj", "<cmd>horizontal resize -3<CR>")
-vim.keymap.set("n", "<leader>wk", "<cmd>horizontal resize +3<CR>")
+vim.keymap.set({ "n", "t" }, "<leader>wh", "<cmd>vertical resize -10<CR>", { desc = "Decrement window size vertically" })
+vim.keymap.set({ "n", "t" }, "<leader>wl", "<cmd>vertical resize +10<CR>", { desc = "Increment window size vertically" })
+vim.keymap.set({ "n", "t" }, "<leader>wj", "<cmd>horizontal resize -3<CR>",
+    { desc = "Decrement window size horizontally" })
+vim.keymap.set({ "n", "t" }, "<leader>wk", "<cmd>horizontal resize +3<CR>",
+    { desc = "Decrement window size horizontally" })
+
+-- Buffer operations
+vim.keymap.set("n", "<A-h>", ":bprev<CR>", { desc = "Move to next buffer" })
+vim.keymap.set("n", "<A-l>", ":bnext<CR>", { desc = " Move to previous buffer" })
