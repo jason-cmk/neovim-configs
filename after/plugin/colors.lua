@@ -27,15 +27,19 @@
 -- mantle          #E6E9EF    #292C3C    #1E2030    #181825    Darker bg
 -- crust           #DCE0E8    #232634    #181926    #11111B    Darkest bglllu
 
+local flavour = "mocha"
+
 require("catppuccin").setup({
-    flavour = "mocha",
+    flavour = flavour,
     highlight_overrides = {
         all = function(colors)
             return {
-                Visual = { bg = colors.surface0 }
+                Visual = { bg = colors.surface0 },
+                ["@comment"] = { fg = colors.subtext1, style = { "italic" } },
             }
         end
-    }
+    },
+    term_colors = true,
 })
 
 vim.cmd.colorscheme "catppuccin"
@@ -46,3 +50,12 @@ vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = '#d4b455', bold = true })
 vim.api.nvim_set_hl(0, 'LineNr', { fg = '#FB508F', bold = true })
 vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = '#d4b455', bold = true })
+
+local palette = require("catppuccin.palettes").get_palette(flavour)
+local latte_palette = require("catppuccin.palettes").get_palette("latte")
+
+vim.api.nvim_set_hl(0, 'HarpoonInactive', { bg = palette.base, fg = palette.subtext1 })
+vim.api.nvim_set_hl(0, 'HarpoonActive', { bg = palette.pink, fg = palette.surface1, bold = true })
+vim.api.nvim_set_hl(0, 'HarpoonNumberActive', { bg = palette.pink, fg = latte_palette.blue, bold = true })
+vim.api.nvim_set_hl(0, 'HarpoonNumberInactive', { bg = palette.base, fg = palette.mauve })
+vim.api.nvim_set_hl(0, 'TabLineFill', { fg = palette.base })
