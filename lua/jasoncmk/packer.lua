@@ -7,7 +7,9 @@ return require('packer').startup(function(use)
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
 
+    -- Fun stuff
     use 'ThePrimeagen/vim-be-good'
+    use 'Eandrju/cellular-automaton.nvim' -- :CellularAutomaton (make_it_rain | game_of_life)
 
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.1',
