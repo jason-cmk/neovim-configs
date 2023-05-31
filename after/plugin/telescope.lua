@@ -12,3 +12,15 @@ vim.keymap.set('n', '<leader>sb', function()
         previewer = false,
     })
 end, { desc = '[/] Fuzzy [s]earch [b]uffer' })
+
+
+local telescope = require("telescope")
+
+telescope.load_extension("git_worktree")
+
+vim.keymap.set('n', '<leader>wt', telescope.extensions.git_worktree.git_worktrees,
+    { desc = 'git_worktree [W]ork[t]rees' })
+
+vim.api.nvim_create_user_command('Worktree', function()
+    telescope.extensions.git_worktree.create_git_worktree()
+end, {})

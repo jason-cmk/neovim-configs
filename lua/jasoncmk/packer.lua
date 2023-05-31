@@ -11,6 +11,8 @@ return require('packer').startup(function(use)
     use 'ThePrimeagen/vim-be-good'
     use 'Eandrju/cellular-automaton.nvim' -- :CellularAutomaton (make_it_rain | game_of_life)
 
+    use 'ThePrimeagen/git-worktree.nvim'
+
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.1',
         -- or                            , branch = '0.1.x',
