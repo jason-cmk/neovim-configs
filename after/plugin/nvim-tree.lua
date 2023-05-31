@@ -6,6 +6,9 @@ require("nvim-tree").setup({
   filters = {
     dotfiles = false,
   },
+  view = {
+      width = 40
+  }
 })
 
 vim.keymap.set({"n", "v"}, "<leader>pv", ":NvimTreeToggle<cr>", { desc = '[P]roject [v]iew explorer' })
