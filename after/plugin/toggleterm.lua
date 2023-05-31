@@ -1,7 +1,8 @@
 require('toggleterm').setup {
     direction = 'vertical',
-    size = 50,
-    open_mapping = '<leader>tm'
+    size = 75,
+    open_mapping = '<leader>tm',
+    shell = "powershell"
 }
 
 -- Never map leader key in insert mode
