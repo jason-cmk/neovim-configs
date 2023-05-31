@@ -31,13 +31,10 @@ vim.keymap.set({ "n", "v" }, "<leader>i", [[:s/^\(\)/ <left>]])
 vim.keymap.set({ "n", "v" }, "<leader>I", [[:s/^\(\s\+\)\?\S\+\s\+/<CR>]])
 
 -- Window resizing
-vim.keymap.set({ "n", "t" }, "<leader>wh", "<cmd>vertical resize -10<CR>", { desc = "Decrement window size vertically" })
-vim.keymap.set({ "n", "t" }, "<leader>wl", "<cmd>vertical resize +10<CR>", { desc = "Increment window size vertically" })
-vim.keymap.set({ "n", "t" }, "<leader>wj", "<cmd>horizontal resize -3<CR>",
-    { desc = "Decrement window size horizontally" })
-vim.keymap.set({ "n", "t" }, "<leader>wk", "<cmd>horizontal resize +3<CR>",
-    { desc = "Decrement window size horizontally" })
+vim.keymap.set({ "n" }, "<A-h>", "<cmd>vertical resize -10<CR>", { desc = "Decrement window size horizontally" })
+vim.keymap.set({ "n" }, "<A-l>", "<cmd>vertical resize +10<CR>", { desc = "Increment window size horizontally" })
+vim.keymap.set({ "n" }, "<A-j>", "<cmd>horizontal resize -3<CR>",
+    { desc = "Decrement window size vertical" })
+vim.keymap.set({ "n" }, "<A-k>", "<cmd>horizontal resize +3<CR>",
+    { desc = "Decrement window size vertical" })
 
--- Buffer operations
-vim.keymap.set("n", "<A-h>", ":bprev<CR>", { desc = "Move to next buffer" })
-vim.keymap.set("n", "<A-l>", ":bnext<CR>", { desc = " Move to previous buffer" })
