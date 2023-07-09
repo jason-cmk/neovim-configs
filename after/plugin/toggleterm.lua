@@ -1,8 +1,19 @@
-require('toggleterm').setup {
+local toggleterm = require('toggleterm')
+
+local fileSystemSeparator = package.config:sub(1,1)
+local shell
+
+if fileSystemSeparator == '/' then
+    shell = 'bash'
+else
+    shell = 'powershell'
+end 
+
+toggleterm.setup {
     direction = 'vertical',
     size = 75,
     open_mapping = '<leader>tm',
-    shell = "powershell"
+    shell = shell
 }
 
 -- Never map leader key in insert mode
