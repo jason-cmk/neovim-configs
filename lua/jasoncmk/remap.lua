@@ -37,4 +37,3 @@ vim.keymap.set({ "n" }, "<A-j>", "<cmd>horizontal resize -3<CR>",
     { desc = "Decrement window size vertical" })
 vim.keymap.set({ "n" }, "<A-k>", "<cmd>horizontal resize +3<CR>",
     { desc = "Decrement window size vertical" })
-

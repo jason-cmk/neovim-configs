@@ -7,7 +7,7 @@ if fileSystemSeparator == '/' then
     shell = 'bash'
 else
     shell = 'powershell'
-end 
+end
 
 toggleterm.setup {
     direction = 'vertical',
