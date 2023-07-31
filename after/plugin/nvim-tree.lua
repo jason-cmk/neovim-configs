@@ -10,7 +10,8 @@ require("nvim-tree").setup({
       ignore = false
   },
   view = {
-      width = 40
+      width = 40,
+      relativenumber = true
   }
 })
 
