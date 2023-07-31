@@ -35,7 +35,7 @@ require("catppuccin").setup({
         all = function(colors)
             return {
                 Visual = { bg = colors.surface0 },
-                ["@comment"] = { fg = colors.subtext1, style = { "italic" } },
+                ["@comment"] = { fg = colors.green, style = { "italic" } },
             }
         end
     },
