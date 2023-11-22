@@ -34,7 +34,7 @@ require("catppuccin").setup({
     highlight_overrides = {
         all = function(colors)
             return {
-                Visual = { bg = colors.surface0 },
+                Visual = { bg = '#8f4248' },
                 ["@comment"] = { fg = colors.green, style = { "italic" } },
             }
         end

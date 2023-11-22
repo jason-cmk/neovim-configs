@@ -11,7 +11,7 @@ end
 
 toggleterm.setup {
     direction = 'vertical',
-    size = 75,
+    size = 80,
     open_mapping = '<leader>tm',
     shell = shell
 }
