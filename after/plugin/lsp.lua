@@ -26,8 +26,8 @@ local on_attach = function(_, bufnr)
     vim.keymap.set('n', '<leader>vrn', vim.lsp.buf.rename, opts)
     vim.keymap.set('i', '<C-h>', vim.lsp.buf.signature_help, opts)
     vim.keymap.set('n', '<leader>vs', vim.lsp.buf.signature_help, opts)
+    vim.keymap.set({ "n", "v" }, "<leader>f", function() vim.lsp.buf.format({ async = false, timeout_ms = 10000 }) end)
     vim.keymap.set('n', '<leader>va', function()
-
         vim.diagnostic.goto_next()
 
         -- quick fix
