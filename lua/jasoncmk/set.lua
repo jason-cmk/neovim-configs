@@ -33,3 +33,6 @@ vim.g.mapleader = " "
 
 vim.opt.splitbelow = true
 vim.opt.splitright = true
+
+-- Format on save
+vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
