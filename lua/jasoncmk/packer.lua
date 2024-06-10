@@ -97,4 +97,6 @@ return require('packer').startup(function(use)
     use({ 'toppair/peek.nvim', run = 'deno task --quiet build:fast' })
 
     use('github/copilot.vim')
+
+    use('numToStr/Comment.nvim')
 end)
