@@ -25,11 +25,6 @@ vim.keymap.set("n", "Y", [["+Y]])
 vim.keymap.set("n", "<leader>d", [["_d]])
 vim.keymap.set("n", "x", [["_x]])
 
--- Insert to start of line (good for commenting)
-vim.keymap.set({ "n", "v" }, "<leader>i", [[:s/^\(\)/ <left>]])
--- Remove the first non-white space chracters up to the first white-space character (good for uncommenting)
-vim.keymap.set({ "n", "v" }, "<leader>I", [[:s/^\(\s\+\)\?\S\+\s\+/<CR>]])
-
 -- Window resizing
 vim.keymap.set({ "n" }, "<A-h>", "<cmd>vertical resize -10<CR>", { desc = "Decrement window size horizontally" })
 vim.keymap.set({ "n" }, "<A-l>", "<cmd>vertical resize +10<CR>", { desc = "Increment window size horizontally" })
