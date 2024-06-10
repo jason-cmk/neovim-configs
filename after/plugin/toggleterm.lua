@@ -3,9 +3,7 @@ local toggleterm = require('toggleterm')
 local fileSystemSeparator = package.config:sub(1,1)
 local shell
 
-if fileSystemSeparator == '/' then
-    shell = 'fish'
-else
+if fileSystemSeparator ~= '/' then
     shell = 'powershell'
 end
 
