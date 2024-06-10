@@ -60,7 +60,13 @@ return require('packer').startup(function(use)
 
     -- Debugging
     use('mfussenegger/nvim-dap')
-    use { 'rcarriga/nvim-dap-ui', requires = { 'mfussenegger/nvim-dap' } }
+    use {
+        'rcarriga/nvim-dap-ui',
+        requires = {
+            'mfussenegger/nvim-dap',
+            'nvim-neotest/nvim-nio'
+        }
+    }
     use('jbyuki/one-small-step-for-vimkind')
     use('mfussenegger/nvim-dap-python')
 
@@ -85,8 +91,7 @@ return require('packer').startup(function(use)
     use { 'akinsho/toggleterm.nvim', tag = '*' }
 
     use {
-        'lewis6991/gitsigns.nvim',
-        tag = 'latest' -- To use the latest release (do not use this if you run Neovim nightly or dev builds!)
+        'lewis6991/gitsigns.nvim'
     }
 
     use({ 'toppair/peek.nvim', run = 'deno task --quiet build:fast' })
