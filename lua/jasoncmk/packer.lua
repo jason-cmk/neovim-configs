@@ -26,10 +26,10 @@ return require('packer').startup(function(use)
     use('nvim-treesitter/playground')
 
     use({
-  "nvim-treesitter/nvim-treesitter-textobjects",
-  after = "nvim-treesitter",
-  requires = "nvim-treesitter/nvim-treesitter",
-})
+        "nvim-treesitter/nvim-treesitter-textobjects",
+        after = "nvim-treesitter",
+        requires = "nvim-treesitter/nvim-treesitter",
+    })
 
     use('theprimeagen/harpoon')
 
