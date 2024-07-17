@@ -59,7 +59,7 @@ vim.diagnostic.config({
 
 -- Try to attach to buffer 0
 vim.api.nvim_create_user_command('LspX', function()
-    local client = vim.lsp.get_active_clients()[0]
+    local client = vim.lsp.get_clients()
 
     if client == nil then
         print 'No active clients'
