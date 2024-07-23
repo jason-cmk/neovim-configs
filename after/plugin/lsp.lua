@@ -64,6 +64,6 @@ vim.api.nvim_create_user_command('LspX', function()
     if client == nil then
         print 'No active clients'
     else
-        vim.lsp.buf_attach_client(0, client.id)
+        vim.lsp.buf_attach_client(0, 0)
     end
 end, {})
