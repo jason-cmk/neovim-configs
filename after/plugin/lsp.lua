@@ -28,12 +28,12 @@ local on_attach = function(_, bufnr)
     vim.keymap.set('n', '<leader>vs', vim.lsp.buf.signature_help, opts)
     vim.keymap.set({ "n", "v" }, "<leader>f", function() vim.lsp.buf.format({ async = false, timeout_ms = 10000 }) end)
     vim.keymap.set('n', '<leader>va', function()
-        vim.diagnostic.goto_next()
-
         -- quick fix
         local quickFixable = {
             "using ",
-            "Remove Unnecessary Usings"
+            "Remove Unnecessary Usings",
+            "Fix all prettier/prettier problems",
+            "Fix this prettier/prettier problem",
         }
 
         vim.lsp.buf.code_action({
@@ -43,6 +43,7 @@ local on_attach = function(_, bufnr)
                         return true
                     end
                 end
+                return false
             end,
             apply = true
         })
