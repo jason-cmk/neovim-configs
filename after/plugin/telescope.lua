@@ -11,12 +11,19 @@ vim.keymap.set('n', '<leader>gd', builtin.lsp_definitions, { desc = '[G]o to [d]
 vim.keymap.set('n', '<leader>gi', builtin.lsp_implementations, { desc = '[G]o to [i]mplementations' })
 vim.keymap.set('n', '<leader>gt', builtin.lsp_type_definitions, { desc = '[G]o to [t]ype definitions' })
 
+vim.keymap.set('n', '<leader>sp', function()
+    builtin.spell_suggest(require('telescope.themes').get_dropdown {
+        winblend = 10,
+        previewer = false,
+    })
+end, { desc = 'Fuzzy [sp]elling suggestions' })
+
 vim.keymap.set('n', '<leader>sb', function()
     builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
         winblend = 10,
         previewer = false,
     })
-end, { desc = '[/] Fuzzy [s]earch [b]uffer' })
+end, { desc = 'Fuzzy [s]earch [b]uffer' })
 
 
 local telescope = require("telescope")
