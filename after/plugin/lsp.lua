@@ -15,13 +15,34 @@ lsp.defaults.cmp_mappings({
 
 lsp.preset('recommended')
 
+-- Specify how the border looks like
+local border = {
+    { '┌', 'FloatBorder' },
+    { '─', 'FloatBorder' },
+    { '┐', 'FloatBorder' },
+    { '│', 'FloatBorder' },
+    { '┘', 'FloatBorder' },
+    { '─', 'FloatBorder' },
+    { '└', 'FloatBorder' },
+    { '│', 'FloatBorder' },
+}
+
+-- To instead override globally
+local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+  opts = opts or {}
+  opts.border = opts.border or border
+  return orig_util_open_floating_preview(contents, syntax, opts, ...)
+end
+
 local on_attach = function(_, bufnr)
-    local opts = { buffer = bufnr, remap = false }
+    local opts = {
+        buffer = bufnr,
+        remap = false,
+    }
 
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
     vim.keymap.set('n', '<leader>vd', vim.diagnostic.open_float, opts)
-    vim.keymap.set('n', '<leader>jd', vim.diagnostic.goto_next, opts)
-    vim.keymap.set('n', '<leader>kd', vim.diagnostic.goto_prev, opts)
     vim.keymap.set('n', '<leader>vca', vim.lsp.buf.code_action, opts)
     vim.keymap.set('n', '<leader>vrn', vim.lsp.buf.rename, opts)
     vim.keymap.set('i', '<C-h>', vim.lsp.buf.signature_help, opts)
