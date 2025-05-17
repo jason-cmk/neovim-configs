@@ -1,20 +1,3 @@
--- Run neodev before LSP setup
-require('neodev').setup({
-    library = {
-        plugins = { 'nvim-dap-ui' },
-        types = true
-    }
-})
-
-local lsp = require('lsp-zero')
-local cmp = require('cmp')
-
-lsp.defaults.cmp_mappings({
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),
-})
-
-lsp.preset('recommended')
-
 -- Specify how the border looks like
 local border = {
     { '┌', 'FloatBorder' },
@@ -30,62 +13,154 @@ local border = {
 -- To instead override globally
 local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
 function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
-  opts = opts or {}
-  opts.border = opts.border or border
-  return orig_util_open_floating_preview(contents, syntax, opts, ...)
+    opts = opts or {}
+    opts.border = opts.border or border
+    return orig_util_open_floating_preview(contents, syntax, opts, ...)
 end
 
-local on_attach = function(_, bufnr)
-    local opts = {
-        buffer = bufnr,
-        remap = false,
+local opts = {
+    remap = false,
+}
+
+vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+vim.keymap.set('n', '<leader>vd', vim.diagnostic.open_float, opts)
+vim.keymap.set('n', '<leader>vca', vim.lsp.buf.code_action, opts)
+vim.keymap.set('n', '<leader>vrn', vim.lsp.buf.rename, opts)
+vim.keymap.set('i', '<C-h>', vim.lsp.buf.signature_help, opts)
+vim.keymap.set('n', '<leader>vs', vim.lsp.buf.signature_help, opts)
+vim.keymap.set({ "n", "v" }, "<leader>f", function() vim.lsp.buf.format({ async = false, timeout_ms = 10000 }) end)
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+
+vim.keymap.set('n', '<leader>va', function()
+    -- quick fix
+    local quickFixable = {
+        "using ",
+        "Remove Unnecessary Usings",
+        "Fix all prettier/prettier problems",
+        "Fix this prettier/prettier problem",
     }
 
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-    vim.keymap.set('n', '<leader>vd', vim.diagnostic.open_float, opts)
-    vim.keymap.set('n', '<leader>vca', vim.lsp.buf.code_action, opts)
-    vim.keymap.set('n', '<leader>vrn', vim.lsp.buf.rename, opts)
-    vim.keymap.set('i', '<C-h>', vim.lsp.buf.signature_help, opts)
-    vim.keymap.set('n', '<leader>vs', vim.lsp.buf.signature_help, opts)
-    vim.keymap.set({ "n", "v" }, "<leader>f", function() vim.lsp.buf.format({ async = false, timeout_ms = 10000 }) end)
-    vim.keymap.set('n', '<leader>va', function()
-        -- quick fix
-        local quickFixable = {
-            "using ",
-            "Remove Unnecessary Usings",
-            "Fix all prettier/prettier problems",
-            "Fix this prettier/prettier problem",
-        }
-
-        vim.lsp.buf.code_action({
-            filter = function(a)
-                for _, qf in pairs(quickFixable) do
-                    if string.find(a.title, qf, 1) then
-                        return true
-                    end
+    vim.lsp.buf.code_action({
+        filter = function(a)
+            for _, qf in pairs(quickFixable) do
+                if string.find(a.title, qf, 1) then
+                    return true
                 end
-                return false
-            end,
-            apply = true
-        })
-    end, opts)
+            end
+            return false
+        end,
+        apply = true
+    })
+end, opts)
+
+-- Autocomplete
+vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(args)
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+        if client:supports_method('textDocument/completion') then
+            vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
+        end
+    end,
+})
+
+-- Inlay hints
+vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(args)
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+        if client:supports_method('textDocument/inlayHint') then
+            vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
+        end
+    end,
+})
+
+-- Highlight
+vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(args)
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+        if client:supports_method('textDocument/documentHighlight') then
+            local autocmd = vim.api.nvim_create_autocmd
+            local augroup = vim.api.nvim_create_augroup('lsp_highlight', { clear = false })
+
+            vim.api.nvim_clear_autocmds({ buffer = bufnr, group = augroup })
+
+            autocmd({ 'CursorHold' }, {
+                group = augroup,
+                buffer = args.buf,
+                callback = vim.lsp.buf.document_highlight,
+            })
+
+            autocmd({ 'CursorMoved' }, {
+                group = augroup,
+                buffer = args.buf,
+                callback = vim.lsp.buf.clear_references,
+            })
+        end
+    end,
+})
+
+-- Simple tab complete
+vim.opt.completeopt = { 'menu', 'menuone', 'noselect', 'noinsert' }
+vim.opt.shortmess:append('c')
+
+local function tab_complete()
+    if vim.fn.pumvisible() == 1 then
+        -- navigate to next item in completion menu
+        return '<Down>'
+    end
+
+    local c = vim.fn.col('.') - 1
+    local is_whitespace = c == 0 or vim.fn.getline('.'):sub(c, c):match('%s')
+
+    if is_whitespace then
+        -- insert tab
+        return '<Tab>'
+    end
+
+    local lsp_completion = vim.bo.omnifunc == 'v:lua.vim.lsp.omnifunc'
+
+    if lsp_completion then
+        -- trigger lsp code completion
+        return '<C-x><C-o>'
+    end
+
+    -- suggest words in current buffer
+    return '<C-x><C-n>'
 end
 
-lsp.on_attach(on_attach)
+local function tab_prev()
+    if vim.fn.pumvisible() == 1 then
+        -- navigate to previous item in completion menu
+        return '<Up>'
+    end
 
-lsp.setup()
+    -- insert tab
+    return '<Tab>'
+end
+
+vim.keymap.set('i', '<Tab>', tab_complete, { expr = true })
+vim.keymap.set('i', '<S-Tab>', tab_prev, { expr = true })
 
 vim.diagnostic.config({
     virtual_text = true
 })
 
--- Try to attach to buffer 0
-vim.api.nvim_create_user_command('LspX', function()
-    local client = vim.lsp.get_clients()
-
-    if client == nil then
-        print 'No active clients'
-    else
-        vim.lsp.buf_attach_client(0, 0)
-    end
-end, {})
+-- Enable
+vim.lsp.enable({
+    'lua_ls',
+    'csharp_ls',
+    'csformat',
+    'eslint',
+    'dockerls',
+    'docker_compose_language_service',
+    'jedi_language_server',
+    'cssls',
+    'css_variables',
+    'ts_ls',
+    'bashls',
+    'jsonls',
+    'prettier',
+})
