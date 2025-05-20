@@ -1,7 +1,4 @@
--- Disable copilot
-vim.b.copilot_enabled = false
-
-vim.keymap.set('i', '<C-J>', 'copilot#Accept("\\<CR>")', {
+vim.keymap.set('i', '<C-space>', 'copilot#Accept("\\<CR>")', {
     expr = true,
     replace_keycodes = false
 })

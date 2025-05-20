@@ -34,6 +34,14 @@ vim.g.mapleader = " "
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
+-- Prevent comment leader from being inserted automatically
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "*",
+    callback = function()
+        vim.opt_local.formatoptions:remove({ "c", "r", "o" })
+    end,
+})
+
 -- Format on save
 vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
 
