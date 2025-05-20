@@ -1,24 +1,16 @@
--- Specify how the border looks like
-local border = {
-    { '┌', 'FloatBorder' },
-    { '─', 'FloatBorder' },
-    { '┐', 'FloatBorder' },
-    { '│', 'FloatBorder' },
-    { '┘', 'FloatBorder' },
-    { '─', 'FloatBorder' },
-    { '└', 'FloatBorder' },
-    { '│', 'FloatBorder' },
-}
+vim.lsp.util.open_floating_preview = (function()
+    local original_open_floating_preview = vim.lsp.util.open_floating_preview
 
--- To instead override globally
-local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+    return function(contents, syntax, opts, ...)
+        opts = opts or {}
 
----@diagnostic disable-next-line: duplicate-set-field
-function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
-    opts = opts or {}
-    opts.border = opts.border or border
-    return orig_util_open_floating_preview(contents, syntax, opts, ...)
-end
+        -- Use a built-in border style but with custom highlights
+        -- You can choose "single", "double", "rounded", "solid", or "shadow"
+        opts.border = 'single'
+
+        return original_open_floating_preview(contents, syntax, opts, ...)
+    end
+end)()
 
 local opts = {
     remap = false,
