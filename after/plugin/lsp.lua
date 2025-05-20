@@ -12,6 +12,8 @@ local border = {
 
 -- To instead override globally
 local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+
+---@diagnostic disable-next-line: duplicate-set-field
 function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
     opts = opts or {}
     opts.border = opts.border or border
@@ -59,7 +61,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(args)
         local client = vim.lsp.get_client_by_id(args.data.client_id)
 
-        if client:supports_method('textDocument/completion') then
+        if client and client:supports_method('textDocument/completion') then
             vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
         end
     end,
@@ -70,34 +72,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(args)
         local client = vim.lsp.get_client_by_id(args.data.client_id)
 
-        if client:supports_method('textDocument/inlayHint') then
+        if client and client:supports_method('textDocument/inlayHint') then
             vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
-        end
-    end,
-})
-
--- Highlight
-vim.api.nvim_create_autocmd('LspAttach', {
-    callback = function(args)
-        local client = vim.lsp.get_client_by_id(args.data.client_id)
-
-        if client and client:supports_method('textDocument/documentHighlight') then
-            local autocmd = vim.api.nvim_create_autocmd
-            local augroup = vim.api.nvim_create_augroup('lsp_highlight', { clear = false })
-
-            vim.api.nvim_clear_autocmds({ buffer = bufnr, group = augroup })
-
-            autocmd({ 'CursorHold' }, {
-                group = augroup,
-                buffer = args.buf,
-                callback = vim.lsp.buf.document_highlight,
-            })
-
-            autocmd({ 'CursorMoved' }, {
-                group = augroup,
-                buffer = args.buf,
-                callback = vim.lsp.buf.clear_references,
-            })
         end
     end,
 })
