@@ -34,6 +34,8 @@ vim.g.mapleader = " "
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
+vim.opt.completeopt = { "menuone", "noinsert", "noselect" }
+
 -- Prevent comment leader from being inserted automatically
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "*",
