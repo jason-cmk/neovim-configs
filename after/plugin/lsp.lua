@@ -70,12 +70,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end,
 })
 
-vim.api.nvim_create_autocmd('LspAttach', {
-    callback = function(_)
-        vim.diagnostic.config({
-            virtual_text = true
-        })
-    end,
+vim.diagnostic.config({
+    virtual_text = true
 })
 
 -- Enable
