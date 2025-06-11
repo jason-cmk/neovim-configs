@@ -20,7 +20,7 @@ vim.opt.smarttab = true
 
 vim.opt.wrap = false
 
-vim.opt.hlsearch = false
+vim.opt.hlsearch = true -- highlight on search
 vim.opt.incsearch = true
 
 vim.opt.scrolloff = 8
@@ -43,9 +43,6 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.opt_local.formatoptions:remove({ "c", "r", "o" })
     end,
 })
-
--- Format on save
-vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
 
 -- WSL system clipboard
 if vim.fn.has('wsl') == 1 then

@@ -89,4 +89,5 @@ vim.lsp.enable({
     'bashls',
     'jsonls',
     'prettier',
+    'superhtml',
 })
