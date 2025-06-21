@@ -1,17 +1,5 @@
 local harpoon = require("harpoon")
 
--- REQUIRED
----@class HarpoonSettings
----@field save_on_toggle boolean defaults to false
----@field sync_on_ui_close boolean defaults to false
----@field key (fun(): string)
-settings = {
-    save_on_toggle = true,
-    sync_on_ui_close = true,
-},
-harpoon:setup(settings)
--- REQUIRED
-
 vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
 vim.keymap.set("n", "<leader>e", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
 

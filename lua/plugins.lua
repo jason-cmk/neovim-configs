@@ -1,4 +1,11 @@
 return {
+    {
+        "catppuccin/nvim",
+        name = "catppuccin",
+        lazy = false,
+        priority = 1000,
+    },
+
     -- Fun stuff
     'ThePrimeagen/vim-be-good',
     'Eandrju/cellular-automaton.nvim', -- :CellularAutomaton (make_it_rain | game_of_life)
@@ -9,8 +16,6 @@ return {
         tag = '0.1.8',
         dependencies = { 'nvim-lua/plenary.nvim' }
     },
-
-    { 'catppuccin/nvim', name = 'catppuccin' },
 
     {
         'nvim-treesitter/nvim-treesitter',
@@ -24,11 +29,6 @@ return {
         dependencies = 'nvim-treesitter/nvim-treesitter',
     },
     'mason-org/mason.nvim',
-    {
-        "ThePrimeagen/harpoon",
-        branch = "harpoon2",
-        dependencies = { "nvim-lua/plenary.nvim" }
-    },
     {
         "jasonpanosso/harpoon-tabline.nvim",
         dependencies = { "ThePrimeagen/harpoon" }
