@@ -29,6 +29,9 @@
 
 local flavour = "mocha"
 
+local palette = require("catppuccin.palettes").get_palette(flavour)
+local latte_palette = require("catppuccin.palettes").get_palette("latte")
+
 require("catppuccin").setup({
     flavour = flavour,
     highlight_overrides = {
@@ -44,18 +47,19 @@ require("catppuccin").setup({
 
 vim.cmd.colorscheme "catppuccin"
 
-vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+vim.defer_fn(function()
+    vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+    vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+    vim.api.nvim_set_hl(0, 'Cursor', { bg = palette.rosewater })
 
-vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = '#d4b455', bold = true })
-vim.api.nvim_set_hl(0, 'LineNr', { fg = '#FB508F', bold = true })
-vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = '#d4b455', bold = true })
+    vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = '#d4b455', bold = true })
+    vim.api.nvim_set_hl(0, 'LineNr', { fg = '#FB508F', bold = true })
+    vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = '#d4b455', bold = true })
 
-local palette = require("catppuccin.palettes").get_palette(flavour)
-local latte_palette = require("catppuccin.palettes").get_palette("latte")
-
-vim.api.nvim_set_hl(0, 'HarpoonInactive', { bg = palette.base, fg = palette.subtext1 })
-vim.api.nvim_set_hl(0, 'HarpoonActive', { bg = palette.pink, fg = palette.surface1, bold = true })
-vim.api.nvim_set_hl(0, 'HarpoonNumberActive', { bg = palette.pink, fg = latte_palette.blue, bold = true })
-vim.api.nvim_set_hl(0, 'HarpoonNumberInactive', { bg = palette.base, fg = palette.mauve })
-vim.api.nvim_set_hl(0, 'TabLineFill', { fg = palette.base })
+    vim.api.nvim_set_hl(0, 'HarpoonInactive', { bg = palette.base, fg = palette.subtext1 })
+    vim.api.nvim_set_hl(0, 'HarpoonActive', { bg = palette.pink, fg = palette.surface1, bold = true })
+    vim.api.nvim_set_hl(0, 'HarpoonNumberActive', { bg = palette.pink, fg = latte_palette.blue, bold = true })
+    vim.api.nvim_set_hl(0, 'HarpoonNumberInactive', { bg = palette.base, fg = palette.mauve })
+    vim.api.nvim_set_hl(0, 'TabLineFill', { fg = palette.base })
+end, 0
+)

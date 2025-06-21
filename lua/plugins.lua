@@ -6,7 +6,7 @@ return {
 
     {
         'nvim-telescope/telescope.nvim',
-        tag = '0.1.x',
+        tag = '0.1.8',
         dependencies = { 'nvim-lua/plenary.nvim' }
     },
 
@@ -23,9 +23,17 @@ return {
         'nvim-treesitter/nvim-treesitter-textobjects',
         dependencies = 'nvim-treesitter/nvim-treesitter',
     },
-
     'mason-org/mason.nvim',
-    'theprimeagen/harpoon',
+    {
+        "ThePrimeagen/harpoon",
+        branch = "harpoon2",
+        dependencies = { "nvim-lua/plenary.nvim" }
+    },
+    {
+        "jasonpanosso/harpoon-tabline.nvim",
+        dependencies = { "ThePrimeagen/harpoon" }
+    },
+
     'mbbill/undotree',
     'tpope/vim-fugitive',
     'norcalli/nvim-colorizer.lua',

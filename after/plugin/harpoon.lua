@@ -1,30 +1,37 @@
-local mark = require('harpoon.mark')
-local ui = require('harpoon.ui')
-local harpoon = require('harpoon')
-local utils = require('jasoncmk.utils')
+local harpoon = require("harpoon")
 
-harpoon.setup({
-    tabline = true,
-})
+-- REQUIRED
+---@class HarpoonSettings
+---@field save_on_toggle boolean defaults to false
+---@field sync_on_ui_close boolean defaults to false
+---@field key (fun(): string)
+settings = {
+    save_on_toggle = true,
+    sync_on_ui_close = true,
+},
+harpoon:setup(settings)
+-- REQUIRED
 
-vim.keymap.set('n', '<leader>a', function()
-    local buffName = vim.api.nvim_buf_get_name(0)
+vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
+vim.keymap.set("n", "<leader>e", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
 
-    if utils.get_os() == 'windows' then
-        -- Uppercase the root drive e.g. "c:" -> "C:"
-        local root = string.upper(string.sub(buffName, 0, 1))
+vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end)
+vim.keymap.set("n", "<C-j>", function() harpoon:list():select(2) end)
+vim.keymap.set("n", "<C-k>", function() harpoon:list():select(3) end)
+vim.keymap.set("n", "<C-l>", function() harpoon:list():select(4) end)
 
-        buffName = root .. string.sub(buffName, 2, -1)
-
-        buffName = buffName:gsub('/', '\\')
-    end
-
-    mark.add_file(buffName)
-end)
-
-vim.keymap.set('n', '<leader>e', ui.toggle_quick_menu)
-
-vim.keymap.set('n', '<C-h>', function() ui.nav_file(1) end)
-vim.keymap.set('n', '<C-j>', function() ui.nav_file(2) end)
-vim.keymap.set('n', '<C-k>', function() ui.nav_file(3) end)
-vim.keymap.set('n', '<C-l>', function() ui.nav_file(4) end)
+---@class Config
+---@field tab_prefix? string
+---@field tab_suffix? string
+---@field use_editor_color_scheme? boolean
+---@field empty_label? string
+---@field show_empty? boolean
+---@field format_item_names? (fun(list: {value: any}): string[])
+local config = {
+    tab_prefix = " ",
+    tab_suffix = " ",
+    use_editor_color_scheme = true,
+    empty_label = "(empty)",
+    show_empty = true,
+}
+require('harpoon-tabline').setup(config)
