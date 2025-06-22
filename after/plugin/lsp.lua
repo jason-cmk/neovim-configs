@@ -78,7 +78,7 @@ vim.diagnostic.config({
 vim.lsp.enable({
     'lua_ls',
     'csharp_ls',
-    'csformat',
+    'csharpier',
     'eslint',
     'dockerls',
     'docker_compose_language_service',

@@ -5,6 +5,7 @@ return {
         lazy = false,
         priority = 1000,
     },
+    { 'neovim/nvim-lspconfig' },
 
     -- Fun stuff
     'ThePrimeagen/vim-be-good',
