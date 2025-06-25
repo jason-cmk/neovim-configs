@@ -37,6 +37,7 @@ return {
 
     'mbbill/undotree',
     'tpope/vim-fugitive',
+    'tpope/vim-abolish',
     'norcalli/nvim-colorizer.lua',
     'paretje/nvim-man',
 
