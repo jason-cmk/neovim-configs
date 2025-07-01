@@ -102,5 +102,5 @@ return {
         config = function()
             require("sonarqube").setup({})
         end
-    }
+    },
 }
