@@ -19,11 +19,17 @@ require("sonarqube").setup({
             extension_path .. "/analyzers/sonarpython.jar",
             extension_path .. "/analyzers/sonartext.jar",
             extension_path .. "/analyzers/sonarxml.jar",
+            extension_path .. "/analyzers/sonarlintomnisharp.jar",
+        },
+        init_options = {
+            omnisharpDirectory = extension_path .. "/omnisharp",
+            csharpOssPath = extension_path .. "/analyzers/sonarcsharp.jar",
+            csharpEnterprisePath = extension_path .. "/analyzers/csharpenterprise.jar",
         },
     },
     csharp = {
         enabled = true,
-        omnisharpDirectory = vim.fn.stdpath("data") .. "/mason/bin",
+        omnisharpDirectory = extension_path .. "/omnisharp",
         csharpOssPath = extension_path .. "/analyzers/sonarcsharp.jar",
         csharpEnterprisePath = extension_path .. "/analyzers/csharpenterprise.jar",
     },
