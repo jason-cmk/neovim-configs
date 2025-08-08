@@ -91,5 +91,5 @@ vim.lsp.enable({
     'superhtml',
 })
 
--- require'lspconfig'.csharp_ls.setup()
+-- for decompiling C# code
 require("csharpls_extended").buf_read_cmd_bind()

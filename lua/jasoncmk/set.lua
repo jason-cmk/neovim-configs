@@ -59,3 +59,7 @@ if vim.fn.has('wsl') == 1 then
         cache_enabled = 0,
     }
 end
+
+-- set spell checking
+vim.opt.spelllang = "en_us"
+vim.opt.spell = true
