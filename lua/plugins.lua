@@ -40,14 +40,29 @@ return {
     'tpope/vim-abolish',
     'norcalli/nvim-colorizer.lua',
     'paretje/nvim-man',
-
+    'github/copilot.vim',
     {
-        'CopilotC-Nvim/CopilotChat.nvim',
+        "olimorris/codecompanion.nvim",
+        opts = {},
         dependencies = {
-            'github/copilot.vim',                           -- or zbirenbaum/copilot.lua
-            { 'nvim-lua/plenary.nvim', branch = 'master' }, -- for curl, log and async functions
+            "nvim-lua/plenary.nvim",
+            "nvim-treesitter/nvim-treesitter",
+            "ravitemer/mcphub.nvim"
         },
-        build = 'make tiktoken'
+    },
+    {
+        "MeanderingProgrammer/render-markdown.nvim",
+        ft = { "markdown", "codecompanion" }
+    },
+    {
+        "echasnovski/mini.diff",
+        config = function()
+            local diff = require("mini.diff")
+            diff.setup({
+                -- Disabled by default
+                source = diff.gen_source.none(),
+            })
+        end,
     },
 
     -- Debugging
