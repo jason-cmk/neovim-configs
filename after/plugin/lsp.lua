@@ -74,6 +74,44 @@ vim.diagnostic.config({
     virtual_text = true
 })
 
+
+-- Jump to error diagnostics
+local function goto_next_error()
+    local errors = vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
+    if #errors == 0 then
+        vim.notify("No error diagnostics in buffer", vim.log.levels.INFO)
+    else
+        vim.diagnostic.goto_next({
+            severity = vim.diagnostic.severity.ERROR,
+            wrap = true, -- Wrap around when reaching the end of file
+        })
+    end
+end
+
+local function goto_prev_error()
+    local errors = vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
+    if #errors == 0 then
+        vim.notify("No error diagnostics in buffer", vim.log.levels.INFO)
+    else
+        vim.diagnostic.goto_prev({
+            severity = vim.diagnostic.severity.ERROR,
+            wrap = true, -- Wrap around when reaching the beginning of file
+        })
+    end
+end
+
+vim.keymap.set('n', ']e', goto_next_error, {
+    desc = 'Go to next error diagnostic',
+    silent = true
+})
+
+vim.keymap.set('n', '[e', goto_prev_error, {
+    desc = 'Go to previous error diagnostic',
+    silent = true
+})
+
+
+
 -- Enable
 vim.lsp.enable({
     'lua_ls',
