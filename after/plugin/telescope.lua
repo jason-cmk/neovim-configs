@@ -57,10 +57,16 @@ end
 telescope.setup {
     pickers = {
         find_files = {
-            path_display = filenameFirst
+            path_display = filenameFirst,
+            file_ignore_patterns = { 'node_module', '.git', '.venv' },
+        },
+        live_grep = {
+            additional_args = function(_)
+                return { "--hidden" }
+            end
         },
         lsp_references = {
             path_display = filenameFirst
-        }
+        },
     }
 }
