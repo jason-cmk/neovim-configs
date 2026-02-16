@@ -56,16 +56,14 @@ require('gitsigns').setup {
 
         map('n', '[c', function()
             if vim.wo.diff then
-                vim.cmd.normal({ '[c', bang = true })
+                vim.reset.normal({ '[c', bang = true })
             else
-                gitsigns.nav_hunk('prev')
+                gitsigns('prev')
             end
+
         end)
 
         -- Actions
-        map('n', '<leader>hs', gitsigns.stage_hunk)
-        map('n', '<leader>hr', gitsigns.reset_hunk)
-
         map('v', '<leader>hs', function()
             gitsigns.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') })
         end)
@@ -95,6 +93,11 @@ require('gitsigns').setup {
         -- Toggles
         map('n', '<leader>tb', gitsigns.toggle_current_line_blame)
         map('n', '<leader>tw', gitsigns.toggle_word_diff)
+        map('n', '<leader>td', function()
+            gitsigns.toggle_word_diff();
+            gitsigns.toggle_linehl();
+            gitsigns.toggle_current_line_blame();
+        end)
 
         -- Text object
         map({ 'o', 'x' }, 'ih', gitsigns.select_hunk)
