@@ -30,3 +30,10 @@ vim.keymap.set({ "n" }, "<A-j>", "<cmd>horizontal resize -3<CR>",
     { desc = "Decrement window size vertical" })
 vim.keymap.set({ "n" }, "<A-k>", "<cmd>horizontal resize +3<CR>",
     { desc = "Decrement window size vertical" })
+
+-- Copy current relative file path to clipboard
+vim.keymap.set("n", "<leader>yf", function()
+    local file_path = vim.fn.expand("%")
+    vim.fn.setreg("+", file_path)
+    print("Copied file path: " .. file_path)
+end, { desc = "Copy current file path to clipboard" })
