@@ -127,6 +127,7 @@ vim.lsp.enable({
     'jsonls',
     'prettier',
     'superhtml',
+    'intelephense',
 })
 
 -- for decompiling C# code
