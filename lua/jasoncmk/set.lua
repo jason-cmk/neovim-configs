@@ -36,6 +36,8 @@ vim.opt.splitright = true
 
 vim.opt.completeopt = { "menuone", "noinsert", "noselect" }
 
+vim.opt.showbreak = "↪"
+
 -- Prevent comment leader from being inserted automatically
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "*",
