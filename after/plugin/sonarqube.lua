@@ -1,7 +1,8 @@
 local extension_path = vim.fn.stdpath("data")
     .. "/mason/packages/sonarlint-language-server/extension"
 
-require("sonarqube").setup({
+local sonarqube = require("sonarqube")
+sonarqube.setup({
     lsp = {
         cmd = {
             vim.fn.exepath("java"),

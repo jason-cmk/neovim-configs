@@ -35,19 +35,19 @@ return {
         event = "BufReadPre",
     },
     'paretje/nvim-man',
-    'github/copilot.vim',
+    "nvim-lua/plenary.nvim",
+    -- nvim-treesitter 1.x: must not be lazy-loaded (see plugin README). Keeps queries + parsers in sync.
     {
-        "olimorris/codecompanion.nvim",
-        opts = {},
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "nvim-treesitter/nvim-treesitter",
-            "ravitemer/mcphub.nvim"
-        },
+        "nvim-treesitter/nvim-treesitter",
+        lazy = false,
+        build = ":TSUpdate",
+        config = function()
+            require("nvim-treesitter").setup()
+        end,
     },
     {
         "MeanderingProgrammer/render-markdown.nvim",
-        ft = { "markdown", "codecompanion" }
+        ft = { "markdown" }
     },
     {
         "echasnovski/mini.diff",
@@ -107,10 +107,5 @@ return {
             })
         end
     },
-    {
-        "iamkarasik/sonarqube.nvim",
-        config = function()
-            require("sonarqube").setup({})
-        end
-    },
+    "iamkarasik/sonarqube.nvim",
 }
