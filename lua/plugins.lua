@@ -7,16 +7,19 @@ return {
     },
     { 'neovim/nvim-lspconfig' },
 
+    {
+    'nvim-telescope/telescope.nvim', version = '*',
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+            -- optional but recommended
+            { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+        }
+    },
+
     -- Fun stuff
     'ThePrimeagen/vim-be-good',
     'Eandrju/cellular-automaton.nvim', -- :CellularAutomaton (make_it_rain | game_of_life)
     'ThePrimeagen/git-worktree.nvim',
-
-    {
-        'nvim-telescope/telescope.nvim',
-        tag = '0.1.8',
-        dependencies = { 'nvim-lua/plenary.nvim' }
-    },
 
     'mason-org/mason.nvim',
     {
@@ -27,7 +30,10 @@ return {
     'mbbill/undotree',
     'tpope/vim-fugitive',
     'tpope/vim-abolish',
-    'norcalli/nvim-colorizer.lua',
+    {
+        "catgoose/nvim-colorizer.lua",
+        event = "BufReadPre",
+    },
     'paretje/nvim-man',
     'github/copilot.vim',
     {

@@ -1,8 +1,8 @@
-local colorizer = require('colorizer')
-
-colorizer.setup({
-    'json',
-    lua = {
-        names = true
+require("colorizer").setup({
+    filetypes = {
+        "json",
+        lua = {
+            names = true,
+        },
     },
 })
