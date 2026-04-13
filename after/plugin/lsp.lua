@@ -128,6 +128,7 @@ vim.lsp.enable({
     'prettier',
     'superhtml',
     'intelephense',
+    'sqls',
 })
 
 -- for decompiling C# code

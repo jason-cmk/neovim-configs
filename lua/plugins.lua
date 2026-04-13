@@ -8,7 +8,8 @@ return {
     { 'neovim/nvim-lspconfig' },
 
     {
-    'nvim-telescope/telescope.nvim', version = '*',
+        'nvim-telescope/telescope.nvim',
+        version = '*',
         dependencies = {
             'nvim-lua/plenary.nvim',
             -- optional but recommended
@@ -107,5 +108,13 @@ return {
             })
         end
     },
+
     "iamkarasik/sonarqube.nvim",
+
+    {
+        "vinnymeller/swagger-preview.nvim",
+        cmd = { "SwaggerPreview", "SwaggerPreviewStop", "SwaggerPreviewToggle" },
+        build = "npm i",
+        config = true,
+    }
 }
