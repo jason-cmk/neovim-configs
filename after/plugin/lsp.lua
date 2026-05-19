@@ -127,7 +127,6 @@ vim.lsp.enable({
     'jsonls',
     'prettier',
     'superhtml',
-    'intelephense',
     'sqls',
 })
 

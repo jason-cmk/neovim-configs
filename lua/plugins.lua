@@ -95,7 +95,16 @@ return {
 
     'lewis6991/gitsigns.nvim',
 
-    { 'toppair/peek.nvim', build = 'deno task --quiet build:fast' },
+    {
+        "toppair/peek.nvim",
+        event = { "VeryLazy" },
+        build = "deno task --quiet build:fast",
+        config = function()
+            require("peek").setup()
+            vim.api.nvim_create_user_command("PeekOpen", require("peek").open, {})
+            vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
+        end,
+    },
 
     'numToStr/Comment.nvim',
 
