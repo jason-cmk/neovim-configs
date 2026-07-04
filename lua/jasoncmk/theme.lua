@@ -1,7 +1,7 @@
 -- Single source of truth for the active colorscheme + lualine theme.
 -- Picks light or dark based on the LIGHT_SWITCH env var:
---   on  (default) -> light theme
---   off           -> dark theme
+--   1  (default) -> light theme
+--   0            -> dark theme
 --
 -- Each mode is a self-contained table with:
 --   colorscheme  -- name passed to vim.cmd.colorscheme
@@ -13,8 +13,7 @@
 
 local M = {}
 
-local switch = (vim.env.LIGHT_SWITCH or "on"):lower()
-M.is_dark = switch == "off"
+M.is_dark = vim.env.LIGHT_SWITCH == "0"
 
 local function catppuccin(flavour)
     return {
